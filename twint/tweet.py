@@ -68,7 +68,7 @@ def getText(tw):
     text = tw['full_text']
     text = text.replace("http", " http")
     text = text.replace("pic.twitter", " pic.twitter")
-    text = text.replace("\n", " ")
+    #text = text.replace("\n", " ")
 
     return text
 

@@ -18,6 +18,7 @@ bearer = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs' \
 class Twint:
     def __init__(self, config):
         logme.debug(__name__ + ':Twint:__init__')
+        logme.debug(__name__ + ':Twint:__init__'+'debug check')
         if config.Resume is not None and (config.TwitterSearch or config.Followers or config.Following):
             logme.debug(__name__ + ':Twint:__init__:Resume')
             self.init = self.get_resume(config.Resume)
@@ -171,6 +172,7 @@ class Twint:
                 tweet_dict['username'] = tweet.find("div", {"class": "username"}).text.replace('\n', '').replace(' ',
                                                                                                                  '')
                 tweet_dict['tweet'] = tweet.find("div", {"class": "tweet-text"}).find("div", {"class": "dir-ltr"}).text
+                logme.debug("tweet fetch "+tweet_dict['tweet'])
                 date_str = tweet.find("td", {"class": "timestamp"}).find("a").text
                 # test_dates = ["1m", "2h", "Jun 21, 2019", "Mar 12", "28 Jun 19"]
                 # date_str = test_dates[3]
@@ -406,7 +408,7 @@ def Search(config, callback=None):
     config.Favorites = False
     config.Following = False
     config.Followers = False
-    config.Profile = False
+    config.Profile = True
     run(config, callback)
     if config.Pandas_au:
         storage.panda._autoget("tweet")
