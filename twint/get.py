@@ -199,10 +199,8 @@ async def Tweet(url, config, conn):
     logme.debug(__name__ + ':Tweet')
     try:
         response = await Request(url)
-        print(response)
         soup = BeautifulSoup(response, "html.parser")
         tweets = soup.find_all("div", "tweet")
-        logme.info(response)
         await Tweets(tweets, config, conn, url)
     except Exception as e:
         logme.critical(__name__ + ':Tweet:' + str(e))
